@@ -10,7 +10,7 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
 def main():
     """Shows basic usage of the Gmail API.
-    Lists the user's Gmail labels.
+    Lists the user's Gmail labels and label id.
     """
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is

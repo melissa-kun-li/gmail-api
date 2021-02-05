@@ -1,9 +1,3 @@
-'''
-Purpose: This script will find the messages with "unsubscribe" in them, remove the Inbox label, and add the Subscriptions label.
-i.e. Emails will be moved from the inbox folder into the subscriptions folder.
-
-'''
-
 from __future__ import print_function
 import pickle
 import os.path
@@ -15,8 +9,9 @@ from google.auth.transport.requests import Request
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly', 'https://www.googleapis.com/auth/gmail.labels', 'https://www.googleapis.com/auth/gmail.modify']
 
 def main():
-    """Shows basic usage of the Gmail API.
-    Lists the user's Gmail labels.
+    """ Finds the messages in inbox containing "unsubscribe".
+    Removes the message's Inbox label, adds Subscriptions label.
+    i.e. Emails moved from the inbox folder into the subscriptions folder.
     """
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
