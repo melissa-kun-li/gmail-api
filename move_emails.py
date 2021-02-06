@@ -35,6 +35,12 @@ def main():
     # make the API request
     service = build('gmail', 'v1', credentials=creds)
 
+    # find label id where name = 'Subscriptions', later change to app name
+    labels = service.users().labels().list(userId = 'me').execute()
+    for item in labels['labels']:
+        if item['name'] == 'Subscriptions':
+            label_id = item['id']
+
     # need to incorporate nextPageToken in case more than 511 emails
     results = service.users().messages().list(userId = 'me', q = 'label:INBOX unsubscribe', maxResults = 511).execute()
     for item in results['messages']:
@@ -43,7 +49,7 @@ def main():
         # print(message["snippet"])
         # print('\n')
 
-        message = delete_and_add_label('me', message_id, 'Label_2', 'INBOX')
+        message = delete_and_add_label('me', message_id, label_id, 'INBOX')
         try:
             modified_message = service.users().messages().modify(userId = 'me', id = message_id, body = message).execute()
             print('Successfully moved email from Inbox to Subscriptions!')
